@@ -12,7 +12,7 @@ jobs:
     name: Build & Deploy Reflex to Vercel
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
       run: |
         reflex export --frontend-only
         mkdir -p .vercel/output/static
-        cp -r .web/_static/* .vercel/output/static/
+        unzip -o frontend.zip -d .vercel/output/static/
         echo '{"version": 3}' > .vercel/output/config.json
 
     - name: Deploy Static Web to Vercel Edge
