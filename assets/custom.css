@@ -222,3 +222,11 @@ html, body {
   border-radius: var(--radius);
 }
 .leaflet-popup-tip { background: var(--bg-elevated); }
+
+/* Ocultar marca de agua de Reflex (Built with Reflex y el connection indicator estricto) */
+#reflex-watermark { display: none !important; }
+.rt-Box a[href*="reflex.dev"] { display: none !important; }
+[id*="reflex-watermark"] { display: none !important; }
+/* Ocultar enlace general inferior de reflex si aparece */
+a[href="https://reflex.dev"] { display: none !important; }
+.reflex-container a[href*="reflex"] { display: none !important; }
