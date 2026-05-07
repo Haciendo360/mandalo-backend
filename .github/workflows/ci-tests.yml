@@ -1,0 +1,35 @@
+name: CI Tests (MANDALO)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Run Pytest Automation (Security & Logic)
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install Core Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-asyncio httpx pytest-mock
+        
+    - name: Execute Strict Battery Tests
+      env:
+        PYTHONPATH: .
+      run: |
+        # Ejecutará test_asignacion.py, test_wallet.py y test_auth.py
+        pytest tests/ -v

@@ -1,0 +1,44 @@
+name: Deploy Frontend PWA to Vercel
+
+on:
+  workflow_run:
+    workflows: ["CI Tests (MANDALO)"]
+    types:
+      - completed
+    branches: [ "main" ]
+
+jobs:
+  deploy-vercel:
+    name: Build & Deploy Reflex to Vercel
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build Reflex PWA (Frontend)
+      run: |
+        # Reflex export compila ReactJS + NextJS por debajo generando estáticos puros
+        reflex export --frontend-only
+
+    - name: Deploy Static Web to Vercel Edge
+      uses: amondnet/vercel-action@v20
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-args: '--prod'
+        # Apuntamos a la carpeta .web que genera Reflex donde aloja el site final exportado
+        working-directory: ./.web

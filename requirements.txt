@@ -1,0 +1,4 @@
+reflex
+supabase
+python-dotenv
+pydantic
