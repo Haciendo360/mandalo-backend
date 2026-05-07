@@ -4,3 +4,5 @@ assets/external/
 *.db
 .states
 .web
+.vercel
+.env*.local

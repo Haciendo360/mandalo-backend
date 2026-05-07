@@ -34,11 +34,11 @@ jobs:
         reflex export --frontend-only
 
     - name: Deploy Static Web to Vercel Edge
-      uses: amondnet/vercel-action@v20
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-        vercel-args: '--prod'
+      run: npx vercel deploy .web/_static --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+      
+        
+        
+        
         # Apuntamos a la carpeta .web que genera Reflex donde aloja el site final exportado
-        working-directory: ./.web
+        
+
