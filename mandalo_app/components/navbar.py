@@ -35,7 +35,7 @@ def navbar() -> rx.Component:
                     ),
                     rx.text(
                         "MANDALO",
-                        weight="800",
+                        weight="bold",
                         size="4",
                         style={"background": GRADIENT,
                                "-webkit-background-clip": "text",

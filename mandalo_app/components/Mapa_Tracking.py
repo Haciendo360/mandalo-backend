@@ -12,7 +12,7 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
 
 
 class MapState(rx.State):
-    operadores_activos: list[dict] = []
+    operadores_activos: list[dict[str, str]] = []
     total_activos: int = 0
 
     async def on_mount(self):
@@ -39,7 +39,7 @@ def operador_item(op: dict) -> rx.Component:
         rx.vstack(
             rx.text(
                 op["operador_id"][:12] + "...",
-                size="1", weight="600", color="white",
+                size="1", weight="medium", color="white",
                 font_family="monospace",
             ),
             rx.text("En línea", size="1", color="#00E676"),
@@ -71,7 +71,7 @@ def mapa_tracking_view() -> rx.Component:
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="radio", size=18, color=ACCENT),
-                        rx.text("Radar en Vivo", weight="700",
+                        rx.text("Radar en Vivo", weight="bold",
                                 size="4", color="white"),
                         spacing="2", align="center",
                     ),
@@ -80,7 +80,7 @@ def mapa_tracking_view() -> rx.Component:
                             rx.box(
                                 rx.text(
                                     MapState.total_activos,
-                                    weight="800", font_size="2rem", color="white",
+                                    weight="bold", font_size="2rem", color="white",
                                 ),
                                 rx.text("operadores activos",
                                         size="2", color="#A0A0B0"),
@@ -101,7 +101,7 @@ def mapa_tracking_view() -> rx.Component:
                         border="1px solid rgba(0,230,118,0.15)",
                         border_radius="12px",
                     ),
-                    rx.text("Operadores", size="2", weight="600",
+                    rx.text("Operadores", size="2", weight="medium",
                             color="#A0A0B0"),
                     rx.cond(
                         MapState.operadores_activos.length() > 0,
@@ -123,19 +123,19 @@ def mapa_tracking_view() -> rx.Component:
                     rx.box(
                         rx.vstack(
                             rx.text("Estadísticas", size="2",
-                                    weight="600", color="#A0A0B0"),
+                                    weight="medium", color="#A0A0B0"),
                             rx.hstack(
                                 rx.vstack(
-                                    rx.text("0", weight="700", color="white", size="3"),
+                                    rx.text("0", weight="bold", color="white", size="3"),
                                     rx.text("En tránsito", size="1", color="#5A5A6E"),
                                     spacing="0", align="center",
                                 ),
                                 rx.vstack(
-                                    rx.text("0", weight="700", color="white", size="3"),
+                                    rx.text("0", weight="bold", color="white", size="3"),
                                     rx.text("Pedidos activos", size="1", color="#5A5A6E"),
                                     spacing="0", align="center",
                                 ),
-                                justify="space-around", width="100%",
+                                justify="between", width="100%",
                             ),
                             spacing="3",
                         ),
@@ -252,3 +252,4 @@ def mapa_tracking_view() -> rx.Component:
         min_height="100vh",
         on_mount=MapState.on_mount,
     )
+

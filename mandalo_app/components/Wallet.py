@@ -10,7 +10,7 @@ ACCENT   = "#FF6B00"
 class WalletState(rx.State):
     saldo_real: float = 0.0
     saldo_coins: float = 0.0
-    transacciones: list[dict] = []
+    transacciones: list[dict[str, str]] = []
     is_loading: bool = False
     error: str = ""
 
@@ -58,7 +58,7 @@ def tipo_badge(tipo: str) -> rx.Component:
             border_radius="8px",
         ),
         rx.text(tipo.replace("_", " ").title(), size="2",
-                weight="500", color="white"),
+                weight="medium", color="white"),
         spacing="2", align="center",
     )
 
@@ -69,7 +69,7 @@ def tx_row(tx: dict) -> rx.Component:
         rx.table.cell(
             rx.text(
                 f"${tx['monto']}",
-                weight="700", size="3",
+                weight="bold", size="3",
                 color=rx.cond(
                     (tx["tipo"] == "recarga") | (tx["tipo"] == "cashback"),
                     "#00E676",
@@ -79,7 +79,7 @@ def tx_row(tx: dict) -> rx.Component:
         ),
         rx.table.cell(
             rx.box(
-                rx.text(tx["estado"], size="1", weight="600"),
+                rx.text(tx["estado"], size="1", weight="medium"),
                 padding="3px 8px",
                 border_radius="20px",
                 background=rx.cond(
@@ -116,7 +116,7 @@ def wallet_view() -> rx.Component:
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="wallet", size=26, color=ACCENT),
-                        rx.text("Mi Wallet", weight="800",
+                        rx.text("Mi Wallet", weight="bold",
                                 font_size="1.6rem", color="white"),
                         spacing="3", align="center",
                     ),
@@ -133,12 +133,12 @@ def wallet_view() -> rx.Component:
                                 rx.icon(tag="dollar-sign", size=20,
                                         color=ACCENT),
                                 rx.text("Saldo Real", size="2",
-                                        weight="600", color="#A0A0B0"),
+                                        weight="medium", color="#A0A0B0"),
                                 spacing="2", align="center",
                             ),
                             rx.text(
                                 f"${WalletState.saldo_real:.2f}",
-                                weight="900",
+                                weight="bold",
                                 font_size="2.4rem",
                                 style={"background": GRADIENT,
                                        "-webkit-background-clip": "text",
@@ -162,12 +162,12 @@ def wallet_view() -> rx.Component:
                             rx.hstack(
                                 rx.text("🪙", font_size="20px"),
                                 rx.text("MandaloCoins", size="2",
-                                        weight="600", color="#A0A0B0"),
+                                        weight="medium", color="#A0A0B0"),
                                 spacing="2", align="center",
                             ),
                             rx.text(
                                 f"{WalletState.saldo_coins:.2f}",
-                                weight="900",
+                                weight="bold",
                                 font_size="2.4rem",
                                 style={"background": "linear-gradient(135deg, #BE6BD8, #9B59B6)",
                                        "-webkit-background-clip": "text",
@@ -198,7 +198,7 @@ def wallet_view() -> rx.Component:
                             rx.hstack(
                                 rx.icon(tag="list", size=18, color=ACCENT),
                                 rx.text("Historial de Movimientos",
-                                        weight="700", size="4", color="white"),
+                                        weight="bold", size="4", color="white"),
                                 spacing="2", align="center",
                             ),
                             rx.spacer(),
@@ -225,7 +225,7 @@ def wallet_view() -> rx.Component:
                                     rx.table.header(
                                         rx.table.row(
                                             *[rx.table.column_header_cell(
-                                                rx.text(h, size="1", weight="600",
+                                                rx.text(h, size="1", weight="medium",
                                                         color="#5A5A6E",
                                                         text_transform="uppercase",
                                                         letter_spacing="0.05em"),
@@ -241,7 +241,7 @@ def wallet_view() -> rx.Component:
                                     rx.vstack(
                                         rx.text("💸", font_size="48px"),
                                         rx.text("Sin movimientos aún",
-                                                color="#5A5A6E", size="3", weight="500"),
+                                                color="#5A5A6E", size="3", weight="medium"),
                                         rx.text("Las transacciones aparecerán aquí",
                                                 color="#3A3A4E", size="2"),
                                         spacing="2", align="center",

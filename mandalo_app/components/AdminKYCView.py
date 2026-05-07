@@ -8,7 +8,7 @@ ACCENT   = "#FF6B00"
 
 
 class AdminKYCState(rx.State):
-    documentos: list[dict] = []
+    documentos: list[dict[str, str]] = []
     is_loading: bool = False
     error: str = ""
     success: str = ""
@@ -70,7 +70,7 @@ def estado_chip(estado: str) -> rx.Component:
     }
     color, bg, border = colores.get(estado, ("#A0A0B0", "rgba(160,160,176,0.1)", "rgba(160,160,176,0.3)"))
     return rx.box(
-        rx.text(estado.upper(), size="1", weight="700", color=color),
+        rx.text(estado.upper(), size="1", weight="bold", color=color),
         padding="4px 10px",
         background=bg,
         border=f"1px solid {border}",
@@ -92,7 +92,7 @@ def doc_row(doc: dict) -> rx.Component:
         rx.table.cell(
             rx.hstack(
                 rx.icon(tag="file-text", size=14, color=ACCENT),
-                rx.text(doc["tipo_documento"], size="2", weight="500", color="white"),
+                rx.text(doc["tipo_documento"], size="2", weight="medium", color="white"),
                 spacing="2", align="center",
             ),
         ),
@@ -102,7 +102,7 @@ def doc_row(doc: dict) -> rx.Component:
                 rx.link(
                     rx.hstack(
                         rx.icon(tag="external-link", size=12, color=ACCENT),
-                        rx.text("Ver Doc", size="1", color=ACCENT, weight="600"),
+                        rx.text("Ver Doc", size="1", color=ACCENT, weight="medium"),
                         spacing="1",
                     ),
                     href=doc["url_archivo"],
@@ -121,7 +121,7 @@ def doc_row(doc: dict) -> rx.Component:
                         rx.button(
                             rx.hstack(
                                 rx.icon(tag="check", size=12, color="white"),
-                                rx.text("Aprobar", size="1", weight="600", color="white"),
+                                rx.text("Aprobar", size="1", weight="medium", color="white"),
                                 spacing="1",
                             ),
                             on_click=AdminKYCState.aprobar_documento(doc["id"]),
@@ -137,7 +137,7 @@ def doc_row(doc: dict) -> rx.Component:
                         rx.button(
                             rx.hstack(
                                 rx.icon(tag="x", size=12, color="white"),
-                                rx.text("Rechazar", size="1", weight="600", color="white"),
+                                rx.text("Rechazar", size="1", weight="medium", color="white"),
                                 spacing="1",
                             ),
                             on_click=AdminKYCState.rechazar_documento(doc["id"]),
@@ -172,7 +172,7 @@ def admin_kyc_view() -> rx.Component:
                     rx.vstack(
                         rx.hstack(
                             rx.icon(tag="shield-alert", size=26, color=ACCENT),
-                            rx.text("Panel Admin — Revisión KYC", weight="800",
+                            rx.text("Panel Admin — Revisión KYC", weight="bold",
                                     font_size="1.5rem", color="white"),
                             spacing="3", align="center",
                         ),
@@ -231,7 +231,7 @@ def admin_kyc_view() -> rx.Component:
                                 rx.table.header(
                                     rx.table.row(
                                         *[rx.table.column_header_cell(
-                                            rx.text(h, size="1", weight="600",
+                                            rx.text(h, size="1", weight="medium",
                                                     color="#5A5A6E",
                                                     text_transform="uppercase",
                                                     letter_spacing="0.05em"),
@@ -248,7 +248,7 @@ def admin_kyc_view() -> rx.Component:
                                 rx.vstack(
                                     rx.icon(tag="file-search", size=48, color="#2A2A3E"),
                                     rx.text("No hay documentos pendientes",
-                                            color="#5A5A6E", size="3", weight="500"),
+                                            color="#5A5A6E", size="3", weight="medium"),
                                     rx.text("Los documentos nuevos aparecerán aquí",
                                             color="#3A3A4E", size="2"),
                                     spacing="2", align="center",

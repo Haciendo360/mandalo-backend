@@ -58,7 +58,7 @@ def rol_card(icon: str, label: str, value: str, desc: str) -> rx.Component:
     return rx.box(
         rx.vstack(
             rx.icon(tag=icon, size=22, color=rx.cond(is_selected, ACCENT, "#A0A0B0")),
-            rx.text(label, weight="600", size="2",
+            rx.text(label, weight="medium", size="2",
                     color=rx.cond(is_selected, "white", "#A0A0B0")),
             rx.text(desc, size="1", color="#5A5A6E", text_align="center"),
             spacing="1", align="center",
@@ -93,7 +93,7 @@ def login_view() -> rx.Component:
                     ),
                     rx.text(
                         "MANDALO",
-                        weight="900",
+                        weight="bold",
                         font_size="3.5rem",
                         letter_spacing="-1px",
                         style={"background": GRADIENT,
@@ -105,13 +105,13 @@ def login_view() -> rx.Component:
                         "Logística de última milla,",
                         color="rgba(255,255,255,0.8)",
                         size="4",
-                        weight="400",
+                        weight="regular",
                     ),
                     rx.text(
                         "segura y en tiempo real.",
                         color="rgba(255,255,255,0.5)",
                         size="4",
-                        weight="300",
+                        weight="light",
                     ),
                     rx.box(height="40px"),
                     # Feature pills
@@ -166,7 +166,7 @@ def login_view() -> rx.Component:
                     rx.vstack(
                         # Header
                         rx.vstack(
-                            rx.text("Bienvenido de vuelta", weight="800",
+                            rx.text("Bienvenido de vuelta", weight="bold",
                                     font_size="1.75rem", color="white",
                                     class_name="fade-in-up"),
                             rx.text("Ingresa a tu cuenta para continuar",
@@ -179,7 +179,7 @@ def login_view() -> rx.Component:
 
                         # Selector de rol
                         rx.vstack(
-                            rx.text("Soy un:", size="2", weight="500",
+                            rx.text("Soy un:", size="2", weight="medium",
                                     color="#A0A0B0"),
                             rx.hstack(
                                 rol_card("user", "Usuario",   "usuario",  "Envíos"),
@@ -212,7 +212,7 @@ def login_view() -> rx.Component:
                         rx.vstack(
                             rx.vstack(
                                 rx.text("Correo electrónico", size="2",
-                                        weight="500", color="#A0A0B0"),
+                                        weight="medium", color="#A0A0B0"),
                                 rx.el.input(
                                     type="email",
                                     placeholder="tu@correo.com",
@@ -229,7 +229,7 @@ def login_view() -> rx.Component:
                             ),
                             rx.vstack(
                                 rx.text("Contraseña", size="2",
-                                        weight="500", color="#A0A0B0"),
+                                        weight="medium", color="#A0A0B0"),
                                 rx.el.input(
                                     type="password",
                                     placeholder="••••••••",
@@ -257,11 +257,11 @@ def login_view() -> rx.Component:
                                 rx.hstack(
                                     rx.box(class_name="spinner"),
                                     rx.text("Verificando...", color="white",
-                                            weight="600"),
+                                            weight="medium"),
                                     spacing="2", align="center",
                                 ),
                                 rx.text("Ingresar a MANDALO", color="white",
-                                        weight="700", size="3"),
+                                        weight="bold", size="3"),
                             ),
                             on_click=AuthState.on_login,
                             class_name="glow-button",
@@ -291,7 +291,7 @@ def login_view() -> rx.Component:
                                     '<path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z"/>'
                                     '</svg>'
                                 ),
-                                rx.text("Continuar con Google", weight="600",
+                                rx.text("Continuar con Google", weight="medium",
                                         color="white", size="3"),
                                 spacing="3", align="center",
                                 justify="center",
@@ -307,7 +307,7 @@ def login_view() -> rx.Component:
                         rx.hstack(
                             rx.text("¿No tienes cuenta?", color="#5A5A6E", size="2"),
                             rx.link("Regístrate aquí", color=ACCENT, size="2",
-                                    weight="600", href="/register"),
+                                    weight="medium", href="/register"),
                             spacing="1",
                         ),
 

@@ -9,7 +9,7 @@ ACCENT    = "#FF6B00"
 
 
 class DashboardState(rx.State):
-    pedidos: list[dict] = []
+    pedidos: list[dict[str, str]] = []
     is_loading: bool = False
     origen: str = ""
     destino: str = ""
@@ -73,7 +73,7 @@ def estado_badge(estado: str) -> rx.Component:
         "cancelado": ("badge-cancelado", "Cancelado"),
     }
     return rx.box(
-        rx.text(estado, size="1", weight="600"),
+        rx.text(estado, size="1", weight="medium"),
         class_name=f"badge-{estado.replace('_', '-')}",
         padding="4px 10px",
         border_radius="20px",
@@ -97,8 +97,8 @@ def metric_card(icon: str, title: str, value: str, subtitle: str,
                 align="center",
             ),
             rx.box(height="8px"),
-            rx.text(value, weight="800", font_size="1.8rem", color="white"),
-            rx.text(title, weight="600", size="2", color="white"),
+            rx.text(value, weight="bold", font_size="1.8rem", color="white"),
+            rx.text(title, weight="medium", size="2", color="white"),
             rx.text(subtitle, size="1", color="#5A5A6E"),
             spacing="1",
             align_items="start",
@@ -117,14 +117,14 @@ def pedido_row(pedido: dict) -> rx.Component:
         ),
         rx.table.cell(
             rx.text(f"${pedido['precio_calculado']}", size="2",
-                    weight="600", color="white"),
+                    weight="medium", color="white"),
         ),
         rx.table.cell(
             rx.text(f"{pedido['distancia_km']} km", size="2", color="#A0A0B0"),
         ),
         rx.table.cell(
             rx.box(
-                rx.text(pedido["estado"], size="1", weight="600"),
+                rx.text(pedido["estado"], size="1", weight="medium"),
                 padding="3px 10px",
                 border_radius="20px",
                 background="rgba(255,107,0,0.1)",
@@ -142,13 +142,13 @@ def cotizador_card() -> rx.Component:
         rx.vstack(
             rx.hstack(
                 rx.icon(tag="package", size=20, color=ACCENT),
-                rx.text("Nuevo Envío", weight="700", size="4", color="white"),
+                rx.text("Nuevo Envío", weight="bold", size="4", color="white"),
                 spacing="3", align="center",
             ),
             rx.box(height="4px"),
             rx.hstack(
                 rx.vstack(
-                    rx.text("Origen", size="2", weight="500", color="#A0A0B0"),
+                    rx.text("Origen", size="2", weight="medium", color="#A0A0B0"),
                     rx.el.input(
                         placeholder="Dirección de recogida...",
                         on_change=DashboardState.set_origen,
@@ -161,7 +161,7 @@ def cotizador_card() -> rx.Component:
                     flex="1", spacing="2",
                 ),
                 rx.vstack(
-                    rx.text("Destino", size="2", weight="500", color="#A0A0B0"),
+                    rx.text("Destino", size="2", weight="medium", color="#A0A0B0"),
                     rx.el.input(
                         placeholder="Dirección de entrega...",
                         on_change=DashboardState.set_destino,
@@ -177,7 +177,7 @@ def cotizador_card() -> rx.Component:
                     rx.cond(
                         DashboardState.cotizando,
                         rx.box(class_name="spinner"),
-                        rx.text("Cotizar", weight="700", color="white"),
+                        rx.text("Cotizar", weight="bold", color="white"),
                     ),
                     on_click=DashboardState.cotizar,
                     class_name="glow-button",
@@ -193,7 +193,7 @@ def cotizador_card() -> rx.Component:
                     rx.hstack(
                         rx.icon(tag="map-pin", size=16, color=ACCENT),
                         rx.text(f"{DashboardState.cotizacion['distancia_km']} km",
-                                weight="600", color="white", size="3"),
+                                weight="medium", color="white", size="3"),
                         spacing="1",
                     ),
                     rx.hstack(
@@ -206,7 +206,7 @@ def cotizador_card() -> rx.Component:
                     rx.text("Precio estimado:", color="#A0A0B0", size="3"),
                     rx.text(
                         f"${DashboardState.cotizacion['precio']}",
-                        weight="800", font_size="1.4rem",
+                        weight="bold", font_size="1.4rem",
                         style={"background": GRADIENT,
                                "-webkit-background-clip": "text",
                                "-webkit-text-fill-color": "transparent"},
@@ -241,7 +241,7 @@ def dashboard_view() -> rx.Component:
                 # Saludo
                 rx.vstack(
                     rx.text("¡Bienvenido de vuelta! 👋",
-                            weight="800", font_size="1.6rem", color="white",
+                            weight="bold", font_size="1.6rem", color="white",
                             class_name="fade-in-up"),
                     rx.text("Aquí está el resumen de tus operaciones de hoy.",
                             color="#A0A0B0", size="3"),
@@ -268,7 +268,7 @@ def dashboard_view() -> rx.Component:
                         rx.hstack(
                             rx.hstack(
                                 rx.icon(tag="history", size=18, color=ACCENT),
-                                rx.text("Historial de Pedidos", weight="700",
+                                rx.text("Historial de Pedidos", weight="bold",
                                         size="4", color="white"),
                                 spacing="2", align="center",
                             ),
@@ -296,7 +296,7 @@ def dashboard_view() -> rx.Component:
                                     rx.table.header(
                                         rx.table.row(
                                             *[rx.table.column_header_cell(
-                                                rx.text(h, size="1", weight="600",
+                                                rx.text(h, size="1", weight="medium",
                                                         color="#5A5A6E",
                                                         text_transform="uppercase",
                                                         letter_spacing="0.05em"),

@@ -70,12 +70,11 @@ class KYCState(rx.State):
 
 def step_indicator(numero: int, titulo: str, desc: str,
                    completado: bool, activo: bool) -> rx.Component:
-    icon = "check" if completado else str(numero)
     return rx.vstack(
         rx.box(
             rx.text(
                 rx.cond(completado, "✓", str(numero)),
-                weight="800",
+                weight="bold",
                 size="3",
                 color=rx.cond(completado, "white",
                               rx.cond(activo, ACCENT, "#3A3A4E")),
@@ -99,7 +98,7 @@ def step_indicator(numero: int, titulo: str, desc: str,
             justify_content="center",
             box_shadow=rx.cond(activo, "0 0 16px rgba(255,107,0,0.4)", "none"),
         ),
-        rx.text(titulo, weight="700", size="2",
+        rx.text(titulo, weight="bold", size="2",
                 color=rx.cond(activo, "white", "#5A5A6E")),
         rx.text(desc, size="1", color="#3A3A4E",
                 text_align="center", max_width="100px"),
@@ -116,7 +115,7 @@ def kyc_dashboard() -> rx.Component:
                 rx.vstack(
                     rx.hstack(
                         rx.icon(tag="shield", size=28, color=ACCENT),
-                        rx.text("Verificación KYC", weight="800",
+                        rx.text("Verificación KYC", weight="bold",
                                 font_size="1.6rem", color="white"),
                         spacing="3", align="center",
                     ),
@@ -172,7 +171,7 @@ def kyc_dashboard() -> rx.Component:
                                         rx.cond(KYCState.nivel_actual == 2,
                                                 "Nivel 2 activo: Puedes enviar y recibir pedidos",
                                                 "Nivel 3 activo: Acceso completo — Operador Élite")),
-                                weight="600", color="white", size="3",
+                                weight="medium", color="white", size="3",
                             ),
                             rx.text(
                                 rx.cond(KYCState.nivel_actual < 3,
@@ -197,7 +196,7 @@ def kyc_dashboard() -> rx.Component:
                         rx.hstack(
                             rx.icon(tag="upload-cloud", size=20, color=ACCENT),
                             rx.text("Subir Documento de Verificación",
-                                    weight="700", size="4", color="white"),
+                                    weight="bold", size="4", color="white"),
                             spacing="3", align="center",
                         ),
                         rx.box(height="4px"),
@@ -205,7 +204,7 @@ def kyc_dashboard() -> rx.Component:
                         # Tipo de documento
                         rx.vstack(
                             rx.text("Tipo de Documento", size="2",
-                                    weight="500", color="#A0A0B0"),
+                                    weight="medium", color="#A0A0B0"),
                             rx.select(
                                 ["Cédula", "RIF Personal", "RIF Comercial", "Licencia de Conducir"],
                                 value=KYCState.tipo_documento,
@@ -220,7 +219,7 @@ def kyc_dashboard() -> rx.Component:
                             KYCState.tipo_documento == "RIF Comercial",
                             rx.vstack(
                                 rx.text("Número de RIF", size="2",
-                                        weight="500", color="#A0A0B0"),
+                                        weight="medium", color="#A0A0B0"),
                                 rx.el.input(
                                     placeholder="C-123456789",
                                     value=KYCState.rif_value,
@@ -242,7 +241,7 @@ def kyc_dashboard() -> rx.Component:
                                 rx.icon(tag="file-up", size=36,
                                         color="rgba(255,107,0,0.5)"),
                                 rx.text("Arrastra tu documento aquí",
-                                        weight="600", color="white", size="3"),
+                                        weight="medium", color="white", size="3"),
                                 rx.text("o haz click para seleccionar",
                                         color="#5A5A6E", size="2"),
                                 rx.text("PDF, JPG, PNG — máx. 5MB",
@@ -300,13 +299,13 @@ def kyc_dashboard() -> rx.Component:
                                 KYCState.is_uploading,
                                 rx.hstack(
                                     rx.box(class_name="spinner"),
-                                    rx.text("Subiendo...", color="white", weight="600"),
+                                    rx.text("Subiendo...", color="white", weight="medium"),
                                     spacing="2", align="center",
                                 ),
                                 rx.hstack(
                                     rx.icon(tag="send", size=16, color="white"),
                                     rx.text("Enviar para Revisión",
-                                            color="white", weight="700"),
+                                            color="white", weight="bold"),
                                     spacing="2", align="center",
                                 ),
                             ),
