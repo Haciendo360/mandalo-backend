@@ -133,7 +133,7 @@ def login_view() -> rx.Component:
                         spacing="3", align_items="start",
                     ),
                     rx.spacer(),
-                    rx.text("© 2026 Tenisytem · MÁNDALO",
+                    rx.text("© 2026 Tecnisystem · MÁNDALO",
                             color="rgba(255,255,255,0.2)", size="1"),
                     rx.box(height="32px"),
                     spacing="3",
