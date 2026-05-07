@@ -17,9 +17,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar el resto del proyecto
 COPY . .
 
-# Puerto que Railway asignará vía $PORT
-ENV PORT=3000
+# Railway asigna el puerto via $PORT (normalmente 8080)
 EXPOSE 3000
 
-# Arrancar Reflex en producción
-CMD reflex run --env prod --backend-host 0.0.0.0
+# Arrancar Reflex en producción usando el puerto de Railway
+CMD reflex run --env prod --backend-host 0.0.0.0 --frontend-port ${PORT:-3000} --backend-port ${PORT:-8000}
