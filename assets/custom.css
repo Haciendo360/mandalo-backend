@@ -1,0 +1,224 @@
+/* ============================================================
+   MANDALO — Global Design System
+   Dark Mode Premium + Orange Accent
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg-base: #0A0A0F;
+  --bg-surface: #13131A;
+  --bg-elevated: #1C1C27;
+  --accent: #FF6B00;
+  --accent-light: #FFB347;
+  --text-primary: #FFFFFF;
+  --text-secondary: #A0A0B0;
+  --text-muted: #5A5A6E;
+  --success: #00E676;
+  --error: #FF4757;
+  --warning: #FFD700;
+  --border: rgba(255, 107, 0, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --gradient-brand: linear-gradient(135deg, #FF6B00 0%, #FF8C42 50%, #FFB347 100%);
+  --gradient-dark: linear-gradient(135deg, #0A0A0F 0%, #13131A 100%);
+  --shadow-glow: 0 0 20px rgba(255, 107, 0, 0.25);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* ========================
+   SCROLLBAR CUSTOM
+   ======================== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+/* ========================
+   ANIMATIONS
+   ======================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(255,107,0,0.3); }
+  50%       { box-shadow: 0 0 25px rgba(255,107,0,0.7); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ========================
+   UTILITY CLASSES
+   ======================== */
+.fade-in-up  { animation: fadeInUp 0.5s ease both; }
+.fade-in     { animation: fadeIn 0.4s ease both; }
+.slide-in    { animation: slide-in-left 0.4s ease both; }
+
+.gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.glow-button {
+  background: var(--gradient-brand);
+  border: none;
+  border-radius: var(--radius);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+}
+.glow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.5);
+}
+.glow-button:active { transform: translateY(0px); }
+
+.input-field {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--radius) !important;
+  color: var(--text-primary) !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-field:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2) !important;
+  outline: none !important;
+}
+
+/* === OPERATOR MARKER (Mapa) === */
+.operator-marker {
+  width: 16px; height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid white;
+  position: relative;
+  cursor: pointer;
+  animation: glow-pulse 2s ease infinite;
+}
+.operator-marker::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(255, 107, 0, 0.4);
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+/* === STATUS BADGES === */
+.badge-pendiente   { background: rgba(255, 215, 0, 0.15); color: #FFD700; border: 1px solid rgba(255,215,0,0.3); }
+.badge-aprobado    { background: rgba(0, 230, 118, 0.15); color: #00E676; border: 1px solid rgba(0,230,118,0.3); }
+.badge-rechazado   { background: rgba(255, 71, 87, 0.15);  color: #FF4757; border: 1px solid rgba(255,71,87,0.3); }
+.badge-activo      { background: rgba(0, 230, 118, 0.15); color: #00E676; border: 1px solid rgba(0,230,118,0.3); }
+.badge-en-transito { background: rgba(255, 107, 0, 0.15); color: #FF6B00; border: 1px solid rgba(255,107,0,0.3); }
+.badge-entregado   { background: rgba(0, 230, 118, 0.15); color: #00E676; border: 1px solid rgba(0,230,118,0.3); }
+.badge-cancelado   { background: rgba(255, 71, 87, 0.15);  color: #FF4757; border: 1px solid rgba(255,71,87,0.3); }
+
+/* === NAV LINK === */
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.07); }
+.nav-link.active { color: var(--accent); background: rgba(255,107,0,0.1); }
+
+/* === METRIC CARD === */
+.metric-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.metric-card:hover {
+  border-color: var(--border);
+  transform: translateY(-2px);
+}
+
+/* === TABLE ROW HOVER === */
+.table-row { transition: background 0.15s; }
+.table-row:hover { background: rgba(255, 107, 0, 0.05) !important; }
+
+/* === STEPPER === */
+.step-connector {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+  transition: background 0.4s;
+}
+.step-connector.done { background: var(--gradient-brand); }
+
+/* === SPINNER === */
+.spinner {
+  width: 20px; height: 20px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* === LEAFLET DARK OVERRIDES === */
+.leaflet-container { background: #0d1117; }
+.leaflet-tile     { filter: brightness(0.7) saturate(0.8) hue-rotate(180deg) invert(1); }
+.leaflet-popup-content-wrapper {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.leaflet-popup-tip { background: var(--bg-elevated); }
