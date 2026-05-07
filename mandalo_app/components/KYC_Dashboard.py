@@ -120,7 +120,7 @@ def kyc_dashboard() -> rx.Component:
                         spacing="3", align="center",
                     ),
                     rx.text(
-                        "Completa los 3 niveles para acceder a todas las funciones de MANDALO.",
+                        "Completa los 3 niveles para acceder a todas las funciones de MÁNDALO.",
                         color="#A0A0B0", size="3",
                     ),
                     spacing="1", align_items="start", width="100%",

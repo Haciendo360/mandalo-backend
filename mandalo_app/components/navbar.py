@@ -34,7 +34,7 @@ def navbar() -> rx.Component:
                         justify_content="center",
                     ),
                     rx.text(
-                        "MANDALO",
+                        "MÁNDALO",
                         weight="bold",
                         size="4",
                         style={"background": GRADIENT,

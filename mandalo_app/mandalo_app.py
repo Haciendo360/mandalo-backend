@@ -33,9 +33,9 @@ app = rx.App(
 )
 
 # Rutas de la PWA
-app.add_page(login_view,       route="/",            title="MANDALO — Inicia Sesión")
-app.add_page(dashboard_view,   route="/dashboard",   title="MANDALO — Dashboard")
-app.add_page(kyc_dashboard,    route="/kyc",         title="MANDALO — Verificación KYC")
-app.add_page(admin_kyc_view,   route="/admin/kyc",   title="MANDALO — Admin KYC")
-app.add_page(mapa_tracking_view, route="/map",       title="MANDALO — Radar en Vivo")
-app.add_page(wallet_view,      route="/wallet",      title="MANDALO — Mi Wallet")
+app.add_page(login_view,       route="/",            title="MÁNDALO — Inicia Sesión")
+app.add_page(dashboard_view,   route="/dashboard",   title="MÁNDALO — Dashboard")
+app.add_page(kyc_dashboard,    route="/kyc",         title="MÁNDALO — Verificación KYC")
+app.add_page(admin_kyc_view,   route="/admin/kyc",   title="MÁNDALO — Admin KYC")
+app.add_page(mapa_tracking_view, route="/map",       title="MÁNDALO — Radar en Vivo")
+app.add_page(wallet_view,      route="/wallet",      title="MÁNDALO — Mi Wallet")

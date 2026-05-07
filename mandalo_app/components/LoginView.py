@@ -93,7 +93,7 @@ def login_view() -> rx.Component:
                         mb="4",
                     ),
                     rx.text(
-                        "MANDALO",
+                        "MÁNDALO",
                         weight="bold",
                         font_size="3.5rem",
                         letter_spacing="-1px",
@@ -261,7 +261,7 @@ def login_view() -> rx.Component:
                                             weight="medium"),
                                     spacing="2", align="center",
                                 ),
-                                rx.text("Ingresar a MANDALO", color="white",
+                                rx.text("Ingresar a MÁNDALO", color="white",
                                         weight="bold", size="3"),
                             ),
                             on_click=AuthState.on_login,
