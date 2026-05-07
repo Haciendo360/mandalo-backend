@@ -88,7 +88,8 @@ def login_view() -> rx.Component:
                     rx.box(height="60px"),
                     rx.box(
                         rx.text("🛵", font_size="64px",
-                                style={"animation": "float 3s ease-in-out infinite"}),
+                                style={"display": "inline-block", "transform": "scaleX(-1)"}),
+                        style={"animation": "float 3s ease-in-out infinite"},
                         mb="4",
                     ),
                     rx.text(
@@ -132,7 +133,7 @@ def login_view() -> rx.Component:
                         spacing="3", align_items="start",
                     ),
                     rx.spacer(),
-                    rx.text("© 2026 Tecnimas · MANDALO",
+                    rx.text("© 2026 Tenisytem · MÁNDALO",
                             color="rgba(255,255,255,0.2)", size="1"),
                     rx.box(height="32px"),
                     spacing="3",

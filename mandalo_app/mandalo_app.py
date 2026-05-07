@@ -21,6 +21,7 @@ app = rx.App(
         "/custom.css",
     ],
     head_components=[
+        rx.el.link(rel="icon", href="/favicon.ico?v=2", type="image/x-icon"),
         rx.el.link(rel="preconnect", href="https://fonts.googleapis.com"),
         rx.el.link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin=""),
         rx.el.link(
