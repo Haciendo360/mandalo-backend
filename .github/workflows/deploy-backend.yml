@@ -1,6 +1,6 @@
 name: Deploy Backend to Railway
 
-# Usamos workflow_run para asegurarnos que SOLO hace deploy si CI-Tests termina y pasa en verde.
+# Solo hace deploy si CI-Tests termina y pasa en verde.
 on:
   workflow_run:
     workflows: ["CI Tests (MANDALO)"]
@@ -13,19 +13,17 @@ jobs:
     name: Deploy API to Railway
     runs-on: ubuntu-latest
     
-    # Validador crítico: Exigir que GitHub diga 'success' en el workflow anterior.
+    # Exigir que GitHub diga 'success' en el workflow de tests.
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Setup Railway CLI Serverless
+    - name: Setup Railway CLI
       run: npm i -g @railway/cli
 
     - name: Railway Deploy
-      run: railway up --detach
+      run: railway up --detach --service mandalo-backend
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        # Railway leerá automáticamente el archivo Procfile que creamos en la raíz
-        # para iniciar la aplicación con Uvicorn en el contenedor Linux.
