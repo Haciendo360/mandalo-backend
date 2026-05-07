@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["unzip", "nodejs_20"]
+
+[phases.install]
+cmds = ["pip install -r requirements.txt"]
+
+[start]
+cmd = "reflex run --env prod"
