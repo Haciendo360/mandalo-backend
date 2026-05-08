@@ -22,6 +22,18 @@ class AdminPanelState(rx.State):
     error: str = ""
     success: str = ""
 
+    def set_admin_password_input(self, value: str):
+        self.admin_password_input = value
+
+    def set_new_email(self, value: str):
+        self.new_email = value
+
+    def set_new_password(self, value: str):
+        self.new_password = value
+
+    def set_new_role(self, value: str):
+        self.new_role = value
+
     def login_admin(self):
         # We use a preset super password for this dashboard
         real_password = os.getenv("ADMIN_PASSWORD", "admin123")

@@ -16,6 +16,18 @@ class RegisterState(rx.State):
     error: str = ""
     success: str = ""
 
+    def set_email(self, value: str):
+        self.email = value
+
+    def set_password(self, value: str):
+        self.password = value
+
+    def set_confirm_password(self, value: str):
+        self.confirm_password = value
+
+    def set_role(self, value: str):
+        self.role = value
+
     async def on_register(self):
         self.error = ""
         self.success = ""
