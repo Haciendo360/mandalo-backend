@@ -35,7 +35,7 @@ class AuthState(rx.State):
         try:
             client = get_supabase_client()
             result = client.auth.sign_in_with_password(
-                {"email": self.email, "password": self.password}
+                {"email": self.email.strip(), "password": self.password}
             )
             if result.user:
                 self.is_loading = False
@@ -43,13 +43,15 @@ class AuthState(rx.State):
             else:
                 self.error_message = "Credenciales incorrectas"
         except Exception as e:
-            msg = str(e)
-            if "Invalid login" in msg or "invalid_credentials" in msg:
-                self.error_message = "Email o contraseña incorrectos"
-            elif "Email not confirmed" in msg:
-                self.error_message = "Confirma tu correo antes de ingresar"
+            msg = str(e).lower()
+            if "invalid login" in msg or "invalid_credentials" in msg or "invalid credential" in msg:
+                self.error_message = "Email o contraseña incorrectos. Verifica tus datos."
+            elif "email not confirmed" in msg or "not confirmed" in msg:
+                self.error_message = "Tu correo aún no está confirmado. Revisa tu bandeja de entrada."
+            elif "rate" in msg and "limit" in msg:
+                self.error_message = "Demasiados intentos. Espera unos segundos."
             else:
-                self.error_message = f"Error: {msg[:80]}"
+                self.error_message = f"Error de autenticación: {str(e)[:120]}"
         self.is_loading = False
 
 
@@ -220,6 +222,7 @@ def login_view() -> rx.Component:
                                     rx.el.input(
                                         type="email",
                                         placeholder="tu@correo.com",
+                                        value=AuthState.email,
                                         on_change=AuthState.set_email,
                                         class_name="input-field",
                                         style={"width": "100%", "padding": "12px 14px",
@@ -237,6 +240,7 @@ def login_view() -> rx.Component:
                                     rx.el.input(
                                         type="password",
                                         placeholder="••••••••",
+                                        value=AuthState.password,
                                         on_change=AuthState.set_password,
                                         class_name="input-field",
                                         style={"width": "100%", "padding": "12px 14px",
