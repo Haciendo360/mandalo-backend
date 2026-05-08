@@ -162,171 +162,175 @@ def login_view() -> rx.Component:
             ),
 
             # ======== PANEL DERECHO — FORMULARIO ========
-            rx.center(
-                rx.box(
-                    rx.vstack(
-                        # Header
+            rx.box(
+                rx.center(
+                    rx.box(
                         rx.vstack(
-                            rx.text("Bienvenido de vuelta", weight="bold",
-                                    font_size="1.75rem", color="white",
-                                    class_name="fade-in-up"),
-                            rx.text("Ingresa a tu cuenta para continuar",
-                                    color="#A0A0B0", size="3",
-                                    class_name="fade-in"),
-                            spacing="1", align_items="start", width="100%",
-                        ),
-
-                        rx.box(height="24px"),
-
-                        # Selector de rol
-                        rx.vstack(
-                            rx.text("Soy un:", size="2", weight="medium",
-                                    color="#A0A0B0"),
-                            rx.hstack(
-                                rol_card("user", "Usuario",   "usuario",  "Envíos"),
-                                rol_card("store", "Comercio", "comercio", "Despacho"),
-                                rol_card("bike", "Operador",  "operador", "Reparto"),
-                                spacing="2", width="100%",
-                            ),
-                            width="100%", spacing="2",
-                        ),
-
-                        rx.box(height="8px"),
-
-                        # Error message
-                        rx.cond(
-                            AuthState.error_message != "",
-                            rx.hstack(
-                                rx.icon(tag="alert-circle", size=16, color="#FF4757"),
-                                rx.text(AuthState.error_message,
-                                        color="#FF4757", size="2"),
-                                spacing="2",
-                                padding="10px 14px",
-                                border_radius="10px",
-                                background="rgba(255,71,87,0.1)",
-                                border="1px solid rgba(255,71,87,0.3)",
-                                width="100%",
-                            ),
-                        ),
-
-                        # Campos
-                        rx.vstack(
+                            # Header
                             rx.vstack(
-                                rx.text("Correo electrónico", size="2",
-                                        weight="medium", color="#A0A0B0"),
-                                rx.el.input(
-                                    type="email",
-                                    placeholder="tu@correo.com",
-                                    on_change=AuthState.set_email,
-                                    class_name="input-field",
-                                    style={"width": "100%", "padding": "12px 14px",
-                                           "font-size": "14px", "outline": "none",
-                                           "background": "rgba(255,255,255,0.05)",
-                                           "border": "1px solid rgba(255,255,255,0.1)",
-                                           "border-radius": "10px",
-                                           "color": "white"},
-                                ),
-                                width="100%", spacing="2",
+                                rx.text("Bienvenido de vuelta", weight="bold",
+                                        font_size="1.75rem", color="white",
+                                        class_name="fade-in-up"),
+                                rx.text("Ingresa a tu cuenta para continuar",
+                                        color="#A0A0B0", size="3",
+                                        class_name="fade-in"),
+                                spacing="1", align_items="start", width="100%",
                             ),
-                            rx.vstack(
-                                rx.text("Contraseña", size="2",
-                                        weight="medium", color="#A0A0B0"),
-                                rx.el.input(
-                                    type="password",
-                                    placeholder="••••••••",
-                                    on_change=AuthState.set_password,
-                                    on_key_up=rx.cond(
-                                        True, AuthState.on_login, None
-                                    ),
-                                    class_name="input-field",
-                                    style={"width": "100%", "padding": "12px 14px",
-                                           "font-size": "14px", "outline": "none",
-                                           "background": "rgba(255,255,255,0.05)",
-                                           "border": "1px solid rgba(255,255,255,0.1)",
-                                           "border-radius": "10px",
-                                           "color": "white"},
-                                ),
-                                width="100%", spacing="2",
-                            ),
-                            width="100%", spacing="4",
-                        ),
 
-                        # Botón principal
-                        rx.el.button(
-                            rx.cond(
-                                AuthState.is_loading,
+                            rx.box(height="16px"),
+
+                            # Selector de rol
+                            rx.vstack(
+                                rx.text("Soy un:", size="2", weight="medium",
+                                        color="#A0A0B0"),
                                 rx.hstack(
-                                    rx.box(class_name="spinner"),
-                                    rx.text("Verificando...", color="white",
-                                            weight="medium"),
-                                    spacing="2", align="center",
+                                    rol_card("user", "Usuario",   "usuario",  "Envíos"),
+                                    rol_card("store", "Comercio", "comercio", "Despacho"),
+                                    rol_card("bike", "Operador",  "operador", "Reparto"),
+                                    spacing="2", width="100%",
                                 ),
-                                rx.text("Ingresar a MÁNDALO", color="white",
-                                        weight="bold", size="3"),
+                                width="100%", spacing="2",
                             ),
-                            on_click=AuthState.on_login,
-                            class_name="glow-button",
-                            style={"width": "100%", "padding": "14px",
-                                   "font-size": "15px", "cursor": "pointer"},
-                            disabled=AuthState.is_loading,
-                        ),
 
-                        # Divider
-                        rx.hstack(
-                            rx.box(flex="1", height="1px",
-                                   background="rgba(255,255,255,0.08)"),
-                            rx.text("o continúa con", color="#5A5A6E", size="1"),
-                            rx.box(flex="1", height="1px",
-                                   background="rgba(255,255,255,0.08)"),
-                            align="center", width="100%",
-                        ),
+                            # Error message (fixed height placeholder to prevent layout shift)
+                            rx.box(
+                                rx.cond(
+                                    AuthState.error_message != "",
+                                    rx.hstack(
+                                        rx.icon(tag="alert-circle", size=16, color="#FF4757"),
+                                        rx.text(AuthState.error_message,
+                                                color="#FF4757", size="2"),
+                                        spacing="2",
+                                        padding="10px 14px",
+                                        border_radius="10px",
+                                        background="rgba(255,71,87,0.1)",
+                                        border="1px solid rgba(255,71,87,0.3)",
+                                        width="100%",
+                                    ),
+                                ),
+                                width="100%",
+                                min_height="0px",
+                            ),
 
-                        # Botón Google
-                        rx.el.button(
+                            # Campos
+                            rx.vstack(
+                                rx.vstack(
+                                    rx.text("Correo electrónico", size="2",
+                                            weight="medium", color="#A0A0B0"),
+                                    rx.el.input(
+                                        type="email",
+                                        placeholder="tu@correo.com",
+                                        on_change=AuthState.set_email,
+                                        class_name="input-field",
+                                        style={"width": "100%", "padding": "12px 14px",
+                                               "font-size": "14px", "outline": "none",
+                                               "background": "rgba(255,255,255,0.05)",
+                                               "border": "1px solid rgba(255,255,255,0.1)",
+                                               "border-radius": "10px",
+                                               "color": "white"},
+                                    ),
+                                    width="100%", spacing="2",
+                                ),
+                                rx.vstack(
+                                    rx.text("Contraseña", size="2",
+                                            weight="medium", color="#A0A0B0"),
+                                    rx.el.input(
+                                        type="password",
+                                        placeholder="••••••••",
+                                        on_change=AuthState.set_password,
+                                        class_name="input-field",
+                                        style={"width": "100%", "padding": "12px 14px",
+                                               "font-size": "14px", "outline": "none",
+                                               "background": "rgba(255,255,255,0.05)",
+                                               "border": "1px solid rgba(255,255,255,0.1)",
+                                               "border-radius": "10px",
+                                               "color": "white"},
+                                    ),
+                                    width="100%", spacing="2",
+                                ),
+                                width="100%", spacing="4",
+                            ),
+
+                            # Botón principal
+                            rx.el.button(
+                                rx.cond(
+                                    AuthState.is_loading,
+                                    rx.hstack(
+                                        rx.box(class_name="spinner"),
+                                        rx.text("Verificando...", color="white",
+                                                weight="medium"),
+                                        spacing="2", align="center",
+                                    ),
+                                    rx.text("Ingresar a MÁNDALO", color="white",
+                                            weight="bold", size="3"),
+                                ),
+                                on_click=AuthState.on_login,
+                                class_name="glow-button",
+                                style={"width": "100%", "padding": "14px",
+                                       "font-size": "15px", "cursor": "pointer"},
+                                disabled=AuthState.is_loading,
+                            ),
+
+                            # Divider
                             rx.hstack(
-                                rx.html(
-                                    '<svg width="18" height="18" viewBox="0 0 18 18">'
-                                    '<path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z"/>'
-                                    '<path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 01-7.18-2.54H1.83v2.07A8 8 0 008.98 17z"/>'
-                                    '<path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 010-3.04V5.41H1.83a8 8 0 000 7.18l2.67-2.07z"/>'
-                                    '<path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z"/>'
-                                    '</svg>'
-                                ),
-                                rx.text("Continuar con Google", weight="medium",
-                                        color="white", size="3"),
-                                spacing="3", align="center",
-                                justify="center",
+                                rx.box(flex="1", height="1px",
+                                       background="rgba(255,255,255,0.08)"),
+                                rx.text("o continúa con", color="#5A5A6E", size="1"),
+                                rx.box(flex="1", height="1px",
+                                       background="rgba(255,255,255,0.08)"),
+                                align="center", width="100%",
                             ),
-                            style={"width": "100%", "padding": "12px",
-                                   "background": "rgba(255,255,255,0.05)",
-                                   "border": "1px solid rgba(255,255,255,0.1)",
-                                   "border-radius": "10px",
-                                   "cursor": "pointer",
-                                   "transition": "all 0.2s"},
-                        ),
 
-                        rx.hstack(
-                            rx.text("¿No tienes cuenta?", color="#5A5A6E", size="2"),
-                            rx.link("Regístrate aquí", color=ACCENT, size="2",
-                                    weight="medium", href="/register"),
-                            spacing="1",
-                        ),
+                            # Botón Google
+                            rx.el.button(
+                                rx.hstack(
+                                    rx.html(
+                                        '<svg width="18" height="18" viewBox="0 0 18 18">'
+                                        '<path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z"/>'
+                                        '<path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 01-7.18-2.54H1.83v2.07A8 8 0 008.98 17z"/>'
+                                        '<path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 010-3.04V5.41H1.83a8 8 0 000 7.18l2.67-2.07z"/>'
+                                        '<path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z"/>'
+                                        '</svg>'
+                                    ),
+                                    rx.text("Continuar con Google", weight="medium",
+                                            color="white", size="3"),
+                                    spacing="3", align="center",
+                                    justify="center",
+                                ),
+                                style={"width": "100%", "padding": "12px",
+                                       "background": "rgba(255,255,255,0.05)",
+                                       "border": "1px solid rgba(255,255,255,0.1)",
+                                       "border-radius": "10px",
+                                       "cursor": "pointer",
+                                       "transition": "all 0.2s"},
+                            ),
 
+                            rx.hstack(
+                                rx.text("¿No tienes cuenta?", color="#5A5A6E", size="2"),
+                                rx.link("Regístrate aquí", color=ACCENT, size="2",
+                                        weight="medium", href="/register"),
+                                spacing="1",
+                            ),
+
+                            width="100%",
+                            spacing="4",
+                        ),
                         width="100%",
-                        spacing="4",
+                        max_width="420px",
+                        padding="2.5rem",
+                        background=SURFACE,
+                        border_radius="20px",
+                        border=f"1px solid rgba(255,107,0,0.15)",
+                        box_shadow="0 24px 64px rgba(0,0,0,0.6)",
                     ),
-                    width="100%",
-                    max_width="420px",
-                    padding="2.5rem",
-                    background=SURFACE,
-                    border_radius="20px",
-                    border=f"1px solid rgba(255,107,0,0.15)",
-                    box_shadow="0 24px 64px rgba(0,0,0,0.6)",
+                    min_height="100%",
                 ),
                 flex="1",
-                min_height="100vh",
+                height="100vh",
+                overflow_y="auto",
                 background=DARK_BG,
                 padding_x=["1rem", "2rem", "3rem"],
+                padding_y="2rem",
             ),
 
             spacing="0",
